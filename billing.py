@@ -1,4 +1,4 @@
-#Importing libraries
+# Import necessary libraries
 import sqlite3
 import tkinter
 from tkinter import *
@@ -8,32 +8,39 @@ from tkinter import messagebox
 from PIL import Image,ImageTk
 import os
 
-
+# Function for the second window
 def second_window():
     first.destroy()
     from PIL import Image, ImageTk
 
+    # Define the HomeWindow function
     def HomeWindow():
         second.destroy()
+
+        # Create the main window
         root = Tk()
         root.geometry("1500x740+0+0")
         root.title("Restaurant Billing System")
+
+        # Load a background image
         load = Image.open("C:/Users/Lenovo/PycharmProjects/Restaurant_billing/food.jpeg")
         background_image = ImageTk.PhotoImage(load)
         background_label = Label(root, image=background_image)
         background_label.place(x=0, y=0, relheight=1, relwidth=1)
 
-        # database
+        # Create a database for orders
         table = sqlite3.connect("bills.db")
         table.execute('''CREATE TABLE IF NOT EXISTS ORDERS
         (ORDER_NUMBER INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,FRIES_MEAL TEXT,LUNCH_MEAL TEXT,BURGER_MEAL TEXT,PIZZA_MEAL TEXT,CHEESE_BURGER TEXT,DRINKS TEXT,MEAL_1 TEXT,MEAL_2 TEXT,COST TEXT,SERVICE_CHARGE TEXT,TAX TEXT,SUBTOTAL TEXT,TOTAL TEXT);''')
         table.commit()
 
-        # price list GUI
+        # Define the price list GUI function
         def price():
+            # Create a new window for price list
             master = Tk()
             master.geometry("550x650")
             master.title("Price List")
+            # ... (code for displaying price list)
             f1 = Frame(master)
             f1.pack(side=TOP)
             x = Label(f1, text="PRICE LIST\n", font=("comic sans ms", "15", "underline", "bold"), fg="steel blue")
@@ -59,8 +66,7 @@ def second_window():
             master.mainloop()
 
         # -------------------------------------------------------------------------------
-
-        # assigning values to variables
+        # Create variables for input fields
         ran = StringVar()
         fries = StringVar()
         lunch = StringVar()
@@ -81,6 +87,7 @@ def second_window():
         # use of class for calculations
         class Calculate:
             def price(self, e2, e3, e4, e5, e6, e7, m1, m2):
+                # ... (code for price calculations)
                 try:
                     global a, b, c, d, e, f, g, h
                     a = int(e2.get())
@@ -144,9 +151,16 @@ def second_window():
                     # generating bill
 
             def bill(self):
+                # ... (code for generating the bill)
                 localtime = time.strftime('%d-%m-%y   %H:%M:%S')
                 file = open("bills.txt", "w")
-                file.write(localtime + "\n")
+                file.write(localtime + "\n\n")
+                file.write("THE ANUBHAV SPICE RESTAURANT\n\n")
+                file.write("Address:"
+                           "123 Main Street,\n"
+                           "Ambala Cantt,\n"
+                           "Ambala, Haryana, India\n")
+                file.write("Phone: +91 123-456-7890\n\n")
                 file.write("order number : " + str(order) + "\n\n\n")
                 file.write("ITEM                    QUANTITY                AMOUNT                        TOTAL\n")
                 if (costoffries != 0):
@@ -179,10 +193,14 @@ def second_window():
                 file.write("Cost of Meal : Rs " + str(costofmeal) + "\nService : Rs " + str(Service) + "\nTax : Rs " + str(
                     PaidTax) + "\nToatal : Rs " + str(OverAllCost))
 
+
+        # Define the amount function
         def amount():
             c = Calculate()
             c.price(e2, e3, e4, e5, e6, e7, m1, m2)
 
+
+        # Define the call_bill function
         def call_bill():
             c = Calculate()
             c.bill()
@@ -432,7 +450,7 @@ def second_window():
             conn.commit()
     second.mainloop()
 
-
+# Create the main application window
 first=Tk()
 first.geometry("{0}x{1}+0+0".format(first.winfo_screenwidth(), first.winfo_screenheight()))
 load3=Image.open("C:/Users/Lenovo/PycharmProjects/Restaurant_billing/fd1.jpg")
