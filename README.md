@@ -1,2 +1,7 @@
 # restaurant_billing
-This is a restaurant billing system or restaurant management system which supports only billing system.This project is written in python and uses tkinter as gui and sqlite as database.
+
+Tech Stack: Python
+1. Tkinter as GUI
+2. SQLite as database
+
+This is a Restaurant Ordering and Billing System, which includes two windows: Admin Window and Chef Window. These windows handle the process of taking orders from customers, processing the order, and delivering it.
